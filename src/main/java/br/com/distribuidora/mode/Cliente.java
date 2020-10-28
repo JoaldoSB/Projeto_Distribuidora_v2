@@ -1,8 +1,8 @@
 package br.com.distribuidora.mode;
+import java.io.Serializable;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -16,7 +16,11 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name="tb_clientes")
-public class Cliente {
+public class Cliente implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,9 +29,9 @@ public class Cliente {
 	private String cpf;
 	private String email;
 	private String telefone;
-	
-	@OneToMany(mappedBy = "cliente", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JsonManagedReference
+		
+	@OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
+	@JsonManagedReference
     @JsonIgnore
 	private List<Produto> produtos;
 	
