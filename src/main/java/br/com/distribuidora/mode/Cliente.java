@@ -1,25 +1,22 @@
 package br.com.distribuidora.mode;
 import java.io.Serializable;
 import java.util.List;
-import javax.persistence.CascadeType;
+//import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
+//import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
+//import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import com.fasterxml.jackson.annotation.JsonBackReference;
+//import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name="tb_clientes")
 public class Cliente implements Serializable{
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	
 	@Id
@@ -30,16 +27,17 @@ public class Cliente implements Serializable{
 	private String email;
 	private String telefone;
 		
-	@OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
+	//@OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
 	@JsonManagedReference
     @JsonIgnore
+    @OneToMany(mappedBy = "cliente")
 	private List<Produto> produtos;
 	
-	@JsonBackReference
+/*	@JsonBackReference
 	@OneToOne
 	@JoinColumn(name="id_endereco")
 	private Endereco endereco;
-		
+*/		
 	public Integer getId() {
 		return id;
 	}
@@ -76,11 +74,12 @@ public class Cliente implements Serializable{
 	public void setProdutos(List<Produto> produtos) {
 		this.produtos = produtos;
 	}
+/*
 	public Endereco getEndereco() {
 		return endereco;
 	}
 	public void setEndereco(Endereco endereco) {
 		this.endereco = endereco;
 	}
-	
+*/	
 }

@@ -1,15 +1,15 @@
 package br.com.distribuidora.mode;
 import java.io.Serializable;
-import java.util.List;
-import javax.persistence.CascadeType;
+//import java.util.List;
+//import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+//import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+//import com.fasterxml.jackson.annotation.JsonIgnore;
+//import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name="tb_fornecedor")
@@ -26,12 +26,14 @@ public class Fornecedor implements Serializable{
 	private String cnpj;
 	private String email;
 	private String telefone;
-		
+
+/*
 	@OneToMany(mappedBy = "fornecedor", cascade = CascadeType.ALL)
 	@JsonManagedReference
     @JsonIgnore
    	private List<Produto> produtos;
- 		
+*/
+	
 	public Integer getId() {
 		return id;
 	}
@@ -62,11 +64,13 @@ public class Fornecedor implements Serializable{
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
 	}
+
+/*
 	public List<Produto> getProdutos() {
 		return produtos;
 	}
 	public void setProdutos(List<Produto> produtos) {
 		this.produtos = produtos;
 	}
-		
+*/		
 }

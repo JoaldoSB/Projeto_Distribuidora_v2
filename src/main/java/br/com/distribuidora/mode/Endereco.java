@@ -1,6 +1,5 @@
 package br.com.distribuidora.mode;
 import java.io.Serializable;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -23,11 +22,12 @@ public class Endereco implements Serializable{
 	private String rua;
 	private String bairro;
 	private String cidade;
-		
+
+/*	
 	@JsonManagedReference
 	@OneToOne(mappedBy = "endereco")
 	private Cliente cliente;
-	
+*/	
 	@JsonManagedReference
 	@OneToOne(mappedBy = "endereco")
 	private Usuario usuario;
@@ -56,12 +56,14 @@ public class Endereco implements Serializable{
 	public void setCidade(String cidade) {
 		this.cidade = cidade;
 	}
+/*
 	public Cliente getCliente() {
 		return cliente;
 	}
 	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
 	}
+*/
 	public Usuario getUsuario() {
 		return usuario;
 	}

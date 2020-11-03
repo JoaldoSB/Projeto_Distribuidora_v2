@@ -11,38 +11,40 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import br.com.distribuidora.mode.Produto;
-import br.com.distribuidora.repository.ProdutoRepository;
+import br.com.distribuidora.service.ProdutoService;
 
 @RestController
 @RequestMapping("/produtos")
 public class ProdutoController {
 	
 	@Autowired
-	private ProdutoRepository produtoRepository;
+	private ProdutoService produtoService;
 	
 	@PostMapping
 	public Produto Salvar(@RequestBody Produto produto) {
-		this.produtoRepository.save(produto);
+		this.produtoService.salvar(produto);
 		return produto;
 	}
 	
 	@GetMapping
 	public List<Produto> Listar(){
-		return this.produtoRepository.findAll();
+		return this.produtoService.listarProduto();
 	}
 	
 	@DeleteMapping("/{id}")
 	public String Remover(@PathVariable("id") Integer id) {
-		this.produtoRepository.deleteById(id);
+		this.produtoService.removerProduto(this.produtoService.buscarPorId(id));
 		return "Produto informado deletado com sucesso!";
 	}
 	
-	@PutMapping("/{id}")
-	public Produto Editar(@PathVariable("id") Integer id, @RequestBody Produto produto) {
-		Produto produtoBD = this.produtoRepository.findById(id).get();
+
+ 	@PutMapping("/{id}")
+	public Produto buscarProdutoId(@PathVariable("id") Integer id, @RequestBody Produto produto) {
+		Produto produtoBD = this.produtoService.buscarPorId(id);
 		BeanUtils.copyProperties(produto, produtoBD, "id");
-		this.produtoRepository.save(produtoBD);
+		this.produtoService.salvar(produtoBD);
 		return produtoBD;
 	}
-	
+
+
 }

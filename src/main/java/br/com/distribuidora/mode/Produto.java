@@ -9,12 +9,10 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 
+
 @Entity
 @Table(name="tb_produto")
 public class Produto implements Serializable{
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	
 	@Id
@@ -24,13 +22,16 @@ public class Produto implements Serializable{
 	private int codigo;
 	private double preco;
 	
-	@JsonBackReference(value = "cliente")
+	//@JsonBackReference(value = "cliente")
+	@JsonBackReference
 	@ManyToOne
     private Cliente cliente;
 
+/*
 	@JsonBackReference(value = "fornecedor")
 	@ManyToOne
     private Fornecedor fornecedor;
+*/
 	
 	public Integer getId() {
 		return id;
@@ -62,11 +63,15 @@ public class Produto implements Serializable{
 	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
 	}
+
+	/*
 	public Fornecedor getFornecedor() {
 		return fornecedor;
 	}
 	public void setFornecedor(Fornecedor fornecedor) {
 		this.fornecedor = fornecedor;
 	}
+*/
+
 	
 }

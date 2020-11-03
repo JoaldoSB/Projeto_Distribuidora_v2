@@ -10,39 +10,38 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import br.com.distribuidora.mode.Cliente;
-import br.com.distribuidora.repository.ClienteRepository;
+import br.com.distribuidora.service.ClienteService;
 
 @RestController
 @RequestMapping("/clientes")
 public class ClienteController {
-	
+
 	@Autowired
-	private ClienteRepository clienteRepository;
+	private ClienteService clienteService;
 	
 	@PostMapping
 	public Cliente salvar(@RequestBody Cliente cliente) {
-		return this.clienteRepository.save(cliente);
+		return this.clienteService.Salvar(cliente);
 	}	
 	
 	@GetMapping
 	public List<Cliente> listar(){
-		return this.clienteRepository.findAll();
+		return this.clienteService.listaClientes();
 	}
 	
 	@DeleteMapping("/{id}")
 	public String remover(@PathVariable("id") Integer id) {
-		this.clienteRepository.deleteById(id);
+		this.clienteService.remover(this.clienteService.buscarPorId(id));
 		return "Cliente informado deletado com sucesso!";
 	}
 	
 	@PutMapping("/{id}")
-	public Cliente editar(@PathVariable("id") Integer id, @RequestBody Cliente cliente) {
-		Cliente clienteBD = this.clienteRepository.findById(id).get();
+	public Cliente buscarClienteId(@PathVariable("id") Integer id, @RequestBody Cliente cliente) {
+		Cliente clienteBD = this.clienteService.buscarPorId(id);
 		BeanUtils.copyProperties(cliente, clienteBD, "id");
-		this.clienteRepository.save(clienteBD);
-		return clienteBD;
+		this.clienteService.Salvar(clienteBD);
+		return clienteBD;	
 	}
 	
 }
