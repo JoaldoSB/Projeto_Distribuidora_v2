@@ -28,7 +28,7 @@ public class ClienteServiceImpl implements ClienteService{
 	@Transactional
 	public void remover(Cliente cliente) {
 		if(!cliente.getProdutos().isEmpty()) {
-			throw new EntidadeComDependenciasException("Cliente não pode ser removido, existem produtos vinculados!");
+			throw new EntidadeComDependenciasException("Erro...Cliente não pode ser removido, pois tem produtos associados!");
 		} else
 		this.clienteRepository.delete(cliente);
 	
